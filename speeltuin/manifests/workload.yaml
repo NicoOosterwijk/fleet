@@ -1,0 +1,114 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app.kubernetes.io/name: go-app
+    app: kubeapp
+    env: canary
+  name: go-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: go-app
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: go-app
+    spec:
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+              - key: app
+                operator: In
+                values:
+                - kubeapp
+            topologyKey: "kubernetes.io/hostname"
+      imagePullSecrets:
+      - name: regcred
+      containers:
+      - name: go-app
+        image: registry.digitalinfo.nl/github-cr/nicooosterwijk/go-app:v2.2
+        imagePullPolicy: Always
+        ports:
+        - name: http
+          containerPort: 8080
+        readinessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /health
+            port: 8080
+            scheme: HTTP
+          initialDelaySeconds: 10
+          periodSeconds: 2
+          successThreshold: 2
+          timeoutSeconds: 2
+        livenessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /health
+            port: 8080
+            scheme: HTTP
+          initialDelaySeconds: 180
+          periodSeconds: 2
+          successThreshold: 1
+          timeoutSeconds: 2
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - ALL
+          privileged: false
+          readOnlyRootFilesystem: true
+          runAsNonRoot: true
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "100m"
+          limits:
+            memory: "128Mi"
+            cpu: "200m"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: go-app
+  labels:
+    app.kubernetes.io/name: go-app
+spec:
+  selector:
+    app.kubernetes.io/name: go-app
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
+      name: http
+---
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+    name: go-app
+    annotations:
+      nginx.ingress.kubernetes.io/canary: true
+      nginx.ingress.kubernetes.io/canary-weight: 25
+spec:
+    rules:
+    - host: app.digitalinfo.nl
+      http:
+        paths:
+        - path: /
+          pathType: ImplementationSpecific
+          backend:
+            serviceName: go-app
+            servicePort: 8080
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: regcred
+data:
+  .dockerconfigjson: eyJhdXRocyI6eyJnaGNyLmlvIjp7InVzZXJuYW1lIjoibmljb29vc3RlcndpamsiLCJwYXNzd29yZCI6ImdocF9KYmhUZWtCcG9aOWw0STFOTHRiOWJGWVdabEpVb3gxT3ZDckwiLCJlbWFpbCI6Im5pY29AZGlnaXRhbGluZm8ubmwiLCJhdXRoIjoiYm1samIyOXZjM1JsY25kcGFtczZaMmh3WDBwaWFGUmxhMEp3YjFvNWJEUkpNVTVNZEdJNVlrWlpWMXBzU2xWdmVERlBka055VEE9PSJ9fX0=
+type: kubernetes.io/dockerconfigjson
