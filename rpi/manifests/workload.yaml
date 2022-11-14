@@ -5,8 +5,8 @@ metadata:
   labels:
     app.kubernetes.io/name: go-app
     app: kubeapp
-    env: canary
-  name: go-app
+    env: rpi
+  name: go-app-deploy
 spec:
   replicas: 1
   selector:
@@ -75,7 +75,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: go-app
+  name: go-app-svc
   labels:
     app.kubernetes.io/name: go-app
 spec:
@@ -87,23 +87,22 @@ spec:
       targetPort: 8080
       name: http
 ---
-apiVersion: networking.k8s.io/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-    name: go-app
-    annotations:
-      nginx.ingress.kubernetes.io/canary: true
-      nginx.ingress.kubernetes.io/canary-weight: 25
+    name: go-app-ingress
 spec:
-    rules:
-    - host: app.digitalinfo.nl
-      http:
-        paths:
-        - path: /
-          pathType: ImplementationSpecific
-          backend:
-            serviceName: go-app
-            servicePort: 8080
+  rules:
+  - host: "app.digitalinfo.nl"
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: go-app-svc
+            port:
+              number: 8080
 ---
 apiVersion: v1
 kind: Secret
