@@ -9,7 +9,7 @@ targetCustomizations:
   kustomize:
     dir: overlays/speeltuin
 
-- name: rpi
-  clusterName: rpi
+- name: raspberry-pi
+  clusterName: raspberry-pi
   kustomize:
     dir: overlays/rpi

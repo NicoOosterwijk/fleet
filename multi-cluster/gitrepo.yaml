@@ -13,5 +13,5 @@ spec:
     clusterSelector:
       matchLabels:
         name: speeltuin
-  - name: rpi
-    clusterName: rpi
+  - name: raspberry-pi
+    clusterName: raspberry-pi
