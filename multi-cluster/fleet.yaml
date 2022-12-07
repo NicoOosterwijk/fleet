@@ -12,4 +12,4 @@ targetCustomizations:
 - name: raspberry-pi
   clusterName: raspberry-pi
   kustomize:
-    dir: overlays/rpi
+    dir: overlays/raspberry-pi
