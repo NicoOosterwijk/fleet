@@ -17,7 +17,7 @@ metadata:
 spec:
   branch: main
   clientSecretName: gitrepo-auth-kb2mc
-  repo: https://github.com/NicoOosterwijk/private-repo.git
+  repo: https://github.com/NicoOosterwijk/fleet.git
   paths:
   - multi-cluster
   
