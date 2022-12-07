@@ -1,0 +1,8 @@
+resources:
+- ../base/namespace.yaml
+- ../base/deployment.yaml
+- ../base/service.yaml
+- ../base/ingress.yaml
+- ../base/secret.yaml
+# patchesStrategicMerge:
+# - deployment.yaml

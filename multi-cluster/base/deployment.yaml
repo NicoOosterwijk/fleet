@@ -7,6 +7,7 @@ metadata:
     app: kubeapp
     env: canary
   name: go-app-deploy
+  namespace: go-app
 spec:
   replicas: 1
   selector:
