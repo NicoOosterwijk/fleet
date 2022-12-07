@@ -1,6 +1,6 @@
 defaultNamespace: go-app
 
-#namespace: go-app
+namespace: go-app
 targetCustomizations:
 - name: speeltuin
   clusterSelector:

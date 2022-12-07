@@ -13,3 +13,5 @@ spec:
     clusterSelector:
       matchLabels:
         name: speeltuin
+  - name: rpi
+    clusterName: rpi
