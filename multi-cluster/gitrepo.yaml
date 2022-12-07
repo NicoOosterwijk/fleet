@@ -1,0 +1,15 @@
+kind: GitRepo
+apiVersion: fleet.cattle.io/v1alpha1
+metadata:
+  name: go-app
+  namespace: fleet-default
+spec:
+  repo: https://github.com/NicoOosterwijk/private-repo.git
+  #repo: https://github.com/rancher/fleet-examples
+  paths:
+  - multi-cluster/kustomize
+  targets:
+  - name: speeltuin
+    clusterSelector:
+      matchLabels:
+        name: speeltuin
