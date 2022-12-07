@@ -1,4 +1,5 @@
 namespace: go-app
+
 targetCustomizations:
 - name: speeltuin
   clusterSelector:
@@ -7,8 +8,6 @@ targetCustomizations:
   kustomize:
     dir: overlays/speeltuin
 - name: rpi
-  clusterSelector:
-    matchLabels:
-      name: rpi
+  clusterName: rpi
   kustomize:
     dir: overlays/rpi
