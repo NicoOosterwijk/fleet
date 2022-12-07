@@ -1,0 +1,11 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: go-app-speeltuin
+spec:
+  template:
+    spec:
+      containers:
+      - name: go-app
+        image: registry.digitalinfo.nl/github-cr/nicooosterwijk/go-app:v2.2
