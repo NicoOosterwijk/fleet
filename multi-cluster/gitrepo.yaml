@@ -7,7 +7,7 @@ spec:
   repo: https://github.com/NicoOosterwijk/private-repo.git
   #repo: https://github.com/rancher/fleet-examples
   paths:
-  - multi-cluster/kustomize
+  - multi-cluster
   targets:
   - name: speeltuin
     clusterSelector:
