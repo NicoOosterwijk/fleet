@@ -16,7 +16,6 @@ metadata:
   namespace: fleet-default
 spec:
   branch: main
-  clientSecretName: github-auth-nico
   repo: https://github.com/NicoOosterwijk/fleet.git
   paths:
   - multi-cluster
