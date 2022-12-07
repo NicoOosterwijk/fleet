@@ -5,7 +5,14 @@ metadata:
   name: go-app-rpi
   namespace: go-app
 spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: go-app-rpi
   template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: go-app-rpi
     spec:
       containers:
       - name: go-app
