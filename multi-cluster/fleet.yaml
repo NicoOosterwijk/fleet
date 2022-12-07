@@ -1,4 +1,4 @@
-#defaultNamespace: go-app
+---
 namespace: go-app
 
 targetCustomizations:
