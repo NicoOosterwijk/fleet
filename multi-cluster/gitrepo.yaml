@@ -1,7 +1,7 @@
 kind: GitRepo
 apiVersion: fleet.cattle.io/v1alpha1
 metadata:
-  name: go-app
+  name: go-app-multi-cluster
   namespace: fleet-default
 spec:
   repo: https://github.com/NicoOosterwijk/private-repo.git
