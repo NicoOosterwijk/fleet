@@ -33,7 +33,7 @@ spec:
       containers:
       - name: go-app
         #image: registry.digitalinfo.nl/github-cr/nicooosterwijk/go-app:v2.2
-        image: docker pull nokkie/go-app:2.2
+        image: nokkie/go-app:2.2
         imagePullPolicy: Always
         ports:
         - name: http
