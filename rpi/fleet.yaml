@@ -1,10 +1,1 @@
 namespace: go-app
-
-# targetCustomizations:
-# - name: rpi
-#   helm:
-#     values:
-#       replicas: 3
-#   clusterSelector:
-#     matchLabels:
-#       env: rpi
