@@ -4,8 +4,9 @@ metadata:
   name: go-app-multi-cluster
   namespace: fleet-default
 spec:
+  branch: main
+  clientSecretName: gitrepo-auth-kb2mc
   repo: https://github.com/NicoOosterwijk/private-repo.git
-  #repo: https://github.com/rancher/fleet-examples
   paths:
   - multi-cluster
   targets:
