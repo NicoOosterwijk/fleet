@@ -28,11 +28,8 @@ spec:
                 values:
                 - kubeapp
             topologyKey: "kubernetes.io/hostname"
-      #imagePullSecrets:
-      #- name: regcred
       containers:
       - name: go-app
-        #image: registry.digitalinfo.nl/docker-hub/nokkie/app:2.0
         image: nokkie/go-app:1.1
         imagePullPolicy: Always
         ports:
@@ -65,7 +62,7 @@ spec:
             - ALL
           privileged: false
           readOnlyRootFilesystem: true
-          runAsNonRoot: false
+          runAsNonRoot: true
         resources:
           requests:
             memory: "64Mi"
