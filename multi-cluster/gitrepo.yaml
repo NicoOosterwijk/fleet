@@ -1,0 +1,20 @@
+---
+kind: GitRepo
+apiVersion: fleet.cattle.io/v1alpha1
+metadata:
+  name: go-app-multi-cluster
+  namespace: fleet-default
+spec:
+  branch: main
+  repo: https://github.com/NicoOosterwijk/fleet.git
+  paths:
+  - multi-cluster
+  
+  targets:
+  - name: speeltuin
+    clusterSelector:
+      matchLabels:
+        name: speeltuin
+        
+  - name: raspberry-pi
+    clusterName: raspberry-pi
